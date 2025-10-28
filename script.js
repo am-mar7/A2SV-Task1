@@ -1,13 +1,10 @@
 let tasks = [];
 let editingId = null;
 
-// Load tasks from memory when page loads
-window.addEventListener('DOMContentLoaded', loadTasks);
 
-// Add task button
 document.getElementById('addBtn').addEventListener('click', addTask);
 
-// Add task on Enter key
+
 document.getElementById('taskInput').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         addTask();
@@ -31,14 +28,13 @@ function addTask() {
 
     tasks.push(task);
     input.value = '';
-    saveTasks();
+
     renderTasks();
 }
 
 function deleteTask(id) {
     if (confirm('Are you sure you want to delete this task?')) {
         tasks = tasks.filter(task => task.id !== id);
-        saveTasks();
         renderTasks();
     }
 }
@@ -47,7 +43,6 @@ function toggleTask(id) {
     const task = tasks.find(task => task.id === id);
     if (task) {
         task.completed = !task.completed;
-        saveTasks();
         renderTasks();
     }
 }
@@ -70,7 +65,6 @@ function saveEdit(id) {
     if (task) {
         task.text = newText;
         editingId = null;
-        saveTasks();
         renderTasks();
     }
 }
@@ -126,13 +120,6 @@ function updateStats() {
     document.getElementById('pendingTasks').textContent = pending;
 }
 
-function saveTasks() {
-    // Store tasks in memory (using a global variable)
-    // Tasks will persist during the session but not after page reload
-}
 
-function loadTasks() {
-    // Initialize with empty tasks array
-    tasks = [];
-    renderTasks();
-}
+
+
